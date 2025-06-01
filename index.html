@@ -636,9 +636,9 @@
         height: 100%;
         background: rgba(0, 0, 0, 0.9);
         display: none;
-        justify-content: center;
-        align-items: center;
         z-index: 10000;
+        overflow-y: auto;
+        padding: 20px 0;
       }
 
       .puzzle-container {
@@ -648,11 +648,17 @@
         box-shadow: 0 0 30px rgba(255, 105, 180, 0.5);
         max-width: 800px;
         width: 90%;
-        display: flex;
+        margin: 20px auto;
         flex-direction: column;
         position: relative;
       }
 
+      .puzzle-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: min-content; /* Pastikan konten tidak memaksa tinggi minimum */
+      }
       .puzzle-header {
         display: flex;
         justify-content: space-between;
@@ -936,23 +942,23 @@
           </div>
           <div class="gallery-item">
             <img src="2.jpg" alt="Memory 2" />
-             <div class="gallery-caption">29 September 2024(Braga)</div>
+            <div class="gallery-caption">29 September 2024(Braga)</div>
           </div>
           <div class="gallery-item">
             <img src="7.jpg" alt="Memory 3" />
-             <div class="gallery-caption">4 Januari 2025(Dago Atas)</div>
+            <div class="gallery-caption">4 Januari 2025(Dago Atas)</div>
           </div>
           <div class="gallery-item">
             <img src="13.jpeg" alt="Memory 4" />
-             <div class="gallery-caption">21 Mei 2025 (Tubaguus Ismail)</div>
+            <div class="gallery-caption">21 Mei 2025 (Tubaguus Ismail)</div>
           </div>
           <div class="gallery-item">
             <img src="4.png" alt="Memory 5" />
-             <div class="gallery-caption">30 April 2024(Kota Tua)</div>
+            <div class="gallery-caption">30 April 2024(Kota Tua)</div>
           </div>
           <div class="gallery-item">
             <img src="5.jpg" alt="Memory 6" />
-             <div class="gallery-caption">29 April 2024 (Gg. Spanyol)</div>
+            <div class="gallery-caption">29 April 2024 (Gg. Spanyol)</div>
           </div>
         </div>
       </div>
@@ -1260,7 +1266,8 @@
 
       // Puzzle Functions
       function openPuzzle() {
-        document.getElementById("puzzle-overlay").style.display = "flex";
+        document.getElementById("puzzle-overlay").style.display = "block";
+        document.body.style.overflow = "hidden"; // Mencegah scroll di body utama
         playClickSound();
         initPuzzle();
       }
@@ -1281,6 +1288,7 @@
 
       function closePuzzle() {
         document.getElementById("puzzle-overlay").style.display = "none";
+        document.body.style.overflow = "auto"; // Mengembalikan scroll body
         // Reset puzzle when closing
         document.getElementById("puzzle-game").style.display = "block";
         document.getElementById("puzzle-complete").style.display = "none";
